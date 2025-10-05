@@ -45,15 +45,18 @@ class Profile(models.Model):
     bio = models.TextField(blank=True)
     avatar = models.ImageField(upload_to="avatars/", default="avatars/default.png")
     github_url = models.URLField(blank=True, null=True)
+    
     linkedin_url = models.URLField(blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     joined_courses = models.ManyToManyField(Course, blank=True, related_name="members")
+
 
     def __str__(self):
         return f"{self.user.username} Profili"
 
 
 class Post(models.Model):
+
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="posts")
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     title = models.CharField(max_length=150)
