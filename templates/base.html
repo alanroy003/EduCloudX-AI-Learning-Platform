@@ -1,0 +1,944 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="EduCloudX - A modern learning platform for computer science courses"
+    />
+    <meta name="theme-color" content="#2196f3" />
+    <title>{% block title %}EduCloudX{% endblock %}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/components.css' %}" />
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="{% static 'images/favicon.svg' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'images/favicon.png' %}"
+    />
+
+    {% block extra_css %}{% endblock %}
+
+    <style>
+      .modern-navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--gray-200);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        padding: 0.75rem 0;
+        transition: var(--transition-all);
+      }
+
+      /* Brand Styles */
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.35rem;
+        transition: var(--transition-all);
+      }
+
+      .brand-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        /* background: var(--primary-50); */
+        border-radius: var(--radius-md);
+        transition: var(--transition-all);
+      }
+
+      .navbar-brand:hover .brand-icon {
+        transform: rotate(-5deg) scale(1.05);
+        background: var(--primary-100);
+      }
+
+      .brand-text {
+        background: linear-gradient(
+          90deg,
+          var(--primary-600),
+          var(--accent-500)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Modern Toggler */
+      .modern-toggler {
+        border: none;
+        padding: 0.5rem;
+        background: var(--gray-100);
+        border-radius: var(--radius-md);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        transition: var(--transition-all);
+      }
+
+      .modern-toggler:hover {
+        background: var(--gray-200);
+      }
+
+      .toggler-icon {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--gray-800);
+        border-radius: 2px;
+        transition: var(--transition-all);
+      }
+
+      .modern-toggler:focus {
+        box-shadow: 0 0 0 3px var(--primary-100);
+      }
+
+      /* Modern Search */
+      .modern-search-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray-800);
+        font-size: 1rem;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .modern-search-input {
+        width: 100%;
+        padding: 0.75rem 3rem 0.75rem 2.75rem;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius-md);
+        background: var(--gray-50);
+        color: var(--gray-800);
+        font-size: 0.95rem;
+        transition: var(--transition-all);
+      }
+
+      .modern-search-input::placeholder {
+        color: var(--gray-800);
+      }
+
+      .modern-search-input:focus {
+        outline: none;
+        border-color: var(--primary-600);
+        background: var(--gray-0);
+        box-shadow: 0 0 0 3px var(--primary-50);
+      }
+
+      .search-submit-btn {
+        position: absolute;
+        right: 0.375rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--primary-600);
+        color: var(--gray-0);
+        border: none;
+        border-radius: var(--radius-md);
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition-all);
+        cursor: pointer;
+      }
+
+      .search-submit-btn:hover {
+        background: var(--primary-700);
+        transform: translateY(-50%) scale(1.05);
+      }
+
+      /* Navigation Icon Button */
+      .nav-icon-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: var(--gray-100);
+        border-radius: var(--radius-md);
+        color: var(--gray-800);
+        font-size: 1.1rem;
+        transition: var(--transition-all);
+        text-decoration: none;
+        position: relative;
+      }
+
+      .nav-icon-btn:hover {
+        background: var(--gray-200);
+        color: var(--primary-600);
+        transform: translateY(-2px);
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 4px;
+        background: var(--danger-500);
+        color: var(--gray-0);
+        font-size: 0.7rem;
+        font-weight: 700;
+        border-radius: var(--radius-full);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--gray-0);
+      }
+
+      /* Modern Navigation Links */
+      .modern-nav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.625rem 1rem;
+        border-radius: var(--radius-md);
+        color: var(--gray-800);
+        font-weight: 500;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: var(--transition-all);
+        position: relative;
+      }
+
+      .modern-nav-link i {
+        font-size: 1.1rem;
+      }
+
+      .modern-nav-link:hover {
+        background: var(--gray-100);
+        color: var(--primary-600);
+        transform: translateY(-2px);
+      }
+
+      .modern-nav-link.active {
+        background: var(--primary-50);
+        color: var(--primary-600);
+      }
+
+      .modern-nav-link.active::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 60%;
+        background: var(--primary-600);
+        border-radius: 0 2px 2px 0;
+      }
+
+      .logout-link:hover {
+        background: rgba(220, 53, 69, 0.1);
+        color: var(--danger-500);
+      }
+
+      /* Custom Buttons */
+      .btn-outline-custom {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.625rem 1.25rem;
+        border: 2px solid var(--gray-200);
+        border-radius: var(--radius-md);
+        color: var(--gray-800);
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: var(--transition-all);
+        background: var(--gray-0);
+      }
+
+      .btn-outline-custom:hover {
+        border-color: var(--primary-600);
+        color: var(--primary-600);
+        background: var(--primary-50);
+        transform: translateY(-2px);
+      }
+
+      .btn-primary-custom {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.625rem 1.25rem;
+        border-radius: var(--radius-md);
+        background: var(--primary-600);
+        color: var(--gray-0);
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: var(--transition-all);
+        box-shadow: var(--shadow-xs);
+      }
+
+      .btn-primary-custom:hover {
+        background: var(--primary-700);
+        color: var(--gray-0);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* Modern Dropdown */
+      .modern-dropdown {
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius-xl);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        padding: 0;
+        margin-top: 0.5rem;
+        min-width: 380px;
+        max-width: 380px;
+        overflow: hidden;
+      }
+
+      .dropdown-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--gray-200);
+        background: var(--gray-50);
+      }
+
+      .dropdown-header h6 {
+        font-weight: 700;
+        color: var(--gray-800);
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .bg-primary-soft {
+        background: var(--primary-50);
+      }
+
+      .text-primary {
+        color: var(#297b76) !important;
+      }
+
+      .dropdown-body {
+        max-height: 400px;
+        overflow-y: auto;
+        padding: 0.5rem;
+      }
+
+      /* Custom Scrollbar */
+      .dropdown-body::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .dropdown-body::-webkit-scrollbar-track {
+        background: var(--gray-100);
+        border-radius: 3px;
+      }
+
+      .dropdown-body::-webkit-scrollbar-thumb {
+        background: var(--gray-200);
+        border-radius: 3px;
+      }
+
+      .dropdown-body::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-600);
+      }
+
+      /* Notification Item */
+      .notification-item {
+        margin-bottom: 0.5rem;
+        border-radius: var(--radius-md);
+        transition: var(--transition-all);
+      }
+
+      .notification-item.unread {
+        background: var(--primary-50);
+      }
+
+      .notification-link {
+        display: flex;
+        align-items: start;
+        gap: 0.875rem;
+        padding: 0.875rem;
+        text-decoration: none;
+        color: var(--gray-800);
+        border-radius: var(--radius-md);
+        transition: var(--transition-all);
+        position: relative;
+      }
+
+      .notification-link:hover {
+        background: var(--gray-100);
+        transform: translateX(4px);
+      }
+
+      .notification-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius-md);
+        background: var(--primary-100);
+        color: var(--primary-600);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      .notification-content {
+        flex: 1;
+      }
+
+      .notification-text {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--gray-800);
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      .notification-time {
+        display: flex;
+        align-items: center;
+        color: var(--gray-800);
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+      }
+
+      .unread-indicator {
+        width: 8px;
+        height: 8px;
+        background: var(--primary-600);
+        border-radius: var(--radius-full);
+        flex-shrink: 0;
+        margin-top: 0.5rem;
+      }
+
+      /* Empty State */
+      .empty-state {
+        text-align: center;
+        padding: 3rem 1rem;
+      }
+
+      .empty-state i {
+        font-size: 3rem;
+        color: var(--gray-800);
+        opacity: 0.3;
+        margin-bottom: 1rem;
+      }
+
+      .empty-state p {
+        color: var(--gray-800);
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      /* Dropdown Footer */
+      .dropdown-footer {
+        border-top: 1px solid var(--gray-200);
+        padding: 0.75rem;
+        background: var(--gray-50);
+      }
+
+      .view-all-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        color: var(--primary-600);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: var(--transition-all);
+      }
+
+      .view-all-link:hover {
+        color: var(--primary-700);
+        gap: 0.75rem;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 991px) {
+        .modern-search-wrapper {
+          max-width: 100%;
+        }
+
+        .modern-dropdown {
+          min-width: 320px;
+          max-width: 320px;
+        }
+
+        .modern-nav-link {
+          justify-content: flex-start;
+          width: 100%;
+        }
+
+        .navbar-nav {
+          gap: 0.5rem !important;
+        }
+
+        .nav-icon-btn {
+          width: 100%;
+          justify-content: flex-start;
+          padding-left: 1rem;
+        }
+
+        .btn-outline-custom,
+        .btn-primary-custom {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .modern-dropdown {
+          min-width: 280px;
+          max-width: 280px;
+        }
+      }
+      /* your inline CSS remains unchanged */
+    </style>
+  </head>
+
+  <body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top modern-navbar">
+      <div class="container">
+        <a
+          class="navbar-brand d-flex align-items-center gap-2"
+          href="{% url 'home' %}"
+        >
+          <div class="brand-icon position-relative">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="#ffffff"
+              class="bi bi-cloud-haze2"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8.5 2a5 5 0 0 1 4.905 4.027A3 3 0 0 1 13 12H3.5A3.5 3.5 0 0 1 .035 9H5.5a.5.5 0 0 0 0-1H.035a3.5 3.5 0 0 1 3.871-2.977A5 5 0 0 1 8.5 2m-6 8a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zM0 13.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5"
+              />
+            </svg>
+          </div>
+          <span class="brand-text">EduCloudX</span>
+        </a>
+
+        <button
+          class="navbar-toggler modern-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+          aria-controls="navbarContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="toggler-icon"></span>
+          <span class="toggler-icon"></span>
+          <span class="toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          {% if user.is_authenticated %}
+          <form
+            class="search-form d-flex mx-lg-4 my-3 my-lg-0 flex-grow-1"
+            action="{% url 'search' %}"
+            method="get"
+          >
+            <div class="modern-search-wrapper">
+              <i class="bi bi-search search-icon"></i>
+              <input
+                class="modern-search-input"
+                type="search"
+                name="q"
+                placeholder="Search posts, courses, and more..."
+                required
+              />
+              <button class="search-submit-btn" type="submit">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </form>
+          {% else %}
+          <div class="me-auto"></div>
+          {% endif %}
+
+          <ul
+            class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center gap-2"
+          >
+            {% if user.is_authenticated %}
+            <!-- Notifications Dropdown -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-icon-btn position-relative"
+                href="#"
+                id="notifDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-bell"></i>
+                {% if unread_notifications_count > 0 %}
+                <span class="notification-badge">
+                  {{ unread_notifications_count }}
+                </span>
+                {% endif %}
+              </a>
+              <div
+                class="dropdown-menu dropdown-menu-end modern-dropdown notifications-dropdown"
+              >
+                <div class="dropdown-header">
+                  <h6 class="mb-0">Notifications</h6>
+                  {% if unread_notifications_count > 0 %}
+                  <span class="badge bg-primary-soft text-primary">
+                    {{ unread_notifications_count }} new
+                  </span>
+                  {% endif %}
+                </div>
+
+                <div class="dropdown-body">
+                  {% if recent_notifications %}
+                  <div class="notifications-list">
+                    {% for note in recent_notifications %}
+                    <div
+                      class="notification-item {% if not note.is_read %}unread{% endif %}"
+                    >
+                      <a
+                        href="{% if note.post %}{% url 'post_detail' note.post.slug %}{% else %}#{% endif %}"
+                        class="notification-link mark-notification"
+                        data-id="{{ note.id }}"
+                      >
+                        <div class="notification-icon">
+                          <i
+                            class="bi bi-{% if note.notification_type == 'like' %}heart-fill{% elif note.notification_type == 'comment' %}chat-fill{% else %}bell-fill{% endif %}"
+                          ></i>
+                        </div>
+                        <div class="notification-content">
+                          <p class="notification-text">{{ note.message }}</p>
+                          <small class="notification-time">
+                            <i class="bi bi-clock me-1"></i>{{
+                            note.created_at|timesince }} ago
+                          </small>
+                        </div>
+                        {% if not note.is_read %}
+                        <span class="unread-indicator"></span>
+                        {% endif %}
+                      </a>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  <div class="empty-state">
+                    <i class="bi bi-bell-slash"></i>
+                    <p>No new notifications</p>
+                  </div>
+                  {% endif %}
+                </div>
+
+                <div class="dropdown-footer">
+                  <a href="{% url 'notifications' %}" class="view-all-link">
+                    View all notifications
+                    <i class="bi bi-arrow-right ms-1"></i>
+                  </a>
+                </div>
+              </div>
+            </li>
+
+            <!-- Navigation Links -->
+            <li class="nav-item">
+              <a
+                class="modern-nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+                href="{% url 'dashboard' %}"
+              >
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="modern-nav-link {% if request.resolver_match.url_name == 'course_list' %}active{% endif %}"
+                href="{% url 'course_list' %}"
+              >
+                <i class="bi bi-book"></i>
+                <span>Courses</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="modern-nav-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}"
+                href="{% url 'profile' %}"
+              >
+                <i class="bi bi-person"></i>
+                <span>Profile</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="modern-nav-link logout-link" href="{% url 'logout' %}">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Logout</span>
+              </a>
+            </li>
+            {% else %}
+            <!-- Guest User Buttons -->
+            <li class="nav-item">
+              <a class="btn-outline-custom" href="{% url 'login' %}">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Login
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="btn-primary-custom" href="{% url 'register' %}">
+                <i class="bi bi-person-plus me-2"></i>Register
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="flash-messages container py-3">
+      {% for message in messages %}
+      <div
+        class="alert alert-{{ message.tags }} alert-dismissible fade show"
+        role="alert"
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">{% block content %}{% endblock %}</main>
+
+    <!-- Back to Top & Footer -->
+    <button
+      id="backToTop"
+      class="btn btn-primary position-fixed rounded-circle p-3"
+      style="bottom: 2rem; right: 2rem; display: none"
+    >
+      <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <footer class="footer py-5 mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="footer-brand d-flex align-items-center gap-2 mb-3">
+              <svg
+                class="text-primary"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M12 2L2 7L12 12L22 7L12 2Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M2 17L12 22L22 17"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M2 12L12 17L22 12"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+              <span class="h5 mb-0">EduCloudX by Alan</span>
+            </div>
+            <p class="text-muted">
+              Empowering education through innovation and technology, built by
+              Alan Roy.
+            </p>
+          </div>
+
+          <div class="col-6 col-lg-2">
+            <h6 class="mb-3">Quick Links</h6>
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2">
+                <a href="{% url 'home' %}" class="nav-link p-0 text-muted"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item mb-2">
+                <a
+                  href="{% url 'course_list' %}"
+                  class="nav-link p-0 text-muted"
+                  >Courses</a
+                >
+              </li>
+              <li class="nav-item mb-2">
+                <a href="{% url 'dashboard' %}" class="nav-link p-0 text-muted"
+                  >Dashboard</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-lg-2">
+            <h6 class="mb-3">Resources</h6>
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2">
+                <a href="#" class="nav-link p-0 text-muted">Documentation</a>
+              </li>
+              <li class="nav-item mb-2">
+                <a href="#" class="nav-link p-0 text-muted">Help Center</a>
+              </li>
+              <li class="nav-item mb-2">
+                <a href="#" class="nav-link p-0 text-muted">Community</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4">
+            <h6 class="mb-3">Stay Updated</h6>
+            <p class="text-muted">
+              Subscribe to our newsletter for the latest updates from Alan Roy
+              and EduCloudX.
+            </p>
+            <form
+              class="d-flex gap-2"
+              method="post"
+              action="{% url 'subscribe_newsletter' %}"
+            >
+              {% csrf_token %}
+              <input
+                type="email"
+                name="email"
+                class="form-control bg-light border"
+                placeholder="Enter your email address"
+                required
+              />
+              <button class="btn btn-primary" type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+
+        <div
+          class="d-flex flex-column flex-sm-row justify-content-between align-items-center mt-4 pt-4 border-top"
+        >
+          <p class="text-muted mb-2 mb-sm-0">
+            © 2025 EduCloudX by Alan Roy. All rights reserved.
+          </p>
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item">
+              <a href="#" class="text-muted">Privacy Policy</a>
+            </li>
+            <li class="list-inline-item">
+              <span class="text-muted">·</span>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" class="text-muted">Terms of Use</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+
+    <script>
+      // HTMX CSRF Setup
+      document.body.addEventListener("htmx:configRequest", (event) => {
+        const csrf = document.querySelector("[name=csrfmiddlewaretoken]");
+        if (csrf) event.detail.headers["X-CSRFToken"] = csrf.value;
+      });
+
+      // Comment Form Reset
+      document.body.addEventListener("htmx:afterRequest", function (evt) {
+        if (evt.detail.elt?.id === "comment-form") {
+          const textarea = evt.detail.elt.querySelector("textarea");
+          if (textarea) textarea.value = "";
+        }
+      });
+
+      // Back to Top Button
+      const backToTopBtn = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => {
+        backToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+      });
+      backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // CSRF Helper
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
+
+      // Notifications
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".mark-notification").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            const id = link.dataset.id;
+            fetch(`/notifications/read/${id}/`, {
+              method: "POST",
+              headers: { "X-CSRFToken": getCookie("csrftoken") },
+            });
+            link.classList.remove("unread");
+            const navBadge = document.querySelector(
+              ".nav-item .badge.bg-danger"
+            );
+            if (navBadge) {
+              const count = parseInt(navBadge.textContent);
+              if (count > 1) navBadge.textContent = count - 1;
+              else navBadge.remove();
+            }
+          });
+        });
+      });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>
