@@ -1,0 +1,547 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!-- Hero Section -->
+<section class="welcome-section position-relative overflow-hidden">
+  <div class="container min-vh-100 d-flex align-items-center">
+    <div class="hero-content text-center mx-auto" style="max-width: 900px">
+      <!-- Badge -->
+      <div class="hero-badge mb-4">
+        <span class="badge-pill">
+          <i class="bi bi-stars me-2"></i>Next Generation Learning Platform
+        </span>
+      </div>
+
+      <h1 class="display-1 fw-bold mb-4">
+        Welcome to
+        <div class="text-gradient display-1 my-3">EduCloudX</div>
+        <div class="d-flex align-items-center justify-content-center">
+          <span class="rocket-icon" style="font-size: 4rem">🚀</span>
+        </div>
+      </h1>
+
+      <p
+        class="lead mb-5 text-muted"
+        style="
+          font-size: 1.4rem;
+          max-width: 650px;
+          margin: 0 auto;
+          line-height: 1.8;
+        "
+      >
+        Explore courses, share knowledge & connect with peers worldwide in an
+        <span class="highlight-text">immersive learning experience</span>.
+      </p>
+
+      <div class="d-flex justify-content-center gap-4 flex-wrap">
+        {% if not user.is_authenticated %}
+        <a href="{% url 'login' %}" class="btn btn-lg btn-get-started">
+          <i class="bi bi-rocket-takeoff me-2"></i>Get Started
+        </a>
+        {% else %}
+        <a href="{% url 'course_list' %}" class="btn btn-lg btn-get-started">
+          <i class="bi bi-book me-2"></i>Explore Courses
+        </a>
+        {% endif %}
+        <a href="#features" class="btn btn-lg btn-learn-more">
+          Learn More <i class="bi bi-arrow-down-short ms-2"></i>
+        </a>
+      </div>
+
+      <!-- Developer Credit -->
+      <div class="developer-credit text-center mt-5">
+        <p class="text-muted mb-2" style="font-size: 1rem">
+          Crafted with ❤️ by <strong class="text-gradient-alt">Alan Roy</strong>
+        </p>
+        <a
+          href="https://www.linkedin.com/in/alanroy2024/"
+          target="_blank"
+          class="linkedin-link"
+        >
+          <i class="bi bi-linkedin me-2"></i>Connect on LinkedIn
+          <i class="bi bi-arrow-up-right ms-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simple Background Pattern -->
+  <div class="hero-pattern"></div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="features-section py-6">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="section-badge">
+        <i class="bi bi-lightning-charge-fill me-2"></i>Why Choose Us
+      </span>
+      <h2 class="display-4 fw-bold mb-4 mt-4">
+        Discover the EduCloudX
+        <span class="text-gradient">Difference</span>
+      </h2>
+      <p
+        class="text-muted lead mx-auto"
+        style="max-width: 650px; font-size: 1.2rem"
+      >
+        Experience a modern learning platform designed for computer science
+        students and enthusiasts with cutting-edge features.
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Course Library -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card h-100 text-center">
+          <div class="feature-icon-wrapper mb-4">
+            <div class="feature-icon bg-primary-soft">
+              <i class="bi bi-book text-primary"></i>
+            </div>
+          </div>
+          <h3 class="h5 mb-3 fw-bold text-gray-800">Course Library</h3>
+          <p class="text-muted mb-0 px-2">
+            Access a curated collection of computer science courses with
+            expert-led content.
+          </p>
+        </div>
+      </div>
+
+      <!-- Collaborative Learning -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card h-100 text-center">
+          <div class="feature-icon-wrapper mb-4">
+            <div class="feature-icon bg-success-soft">
+              <i class="bi bi-people text-success"></i>
+            </div>
+          </div>
+          <h3 class="h5 mb-3 fw-bold text-gray-800">Collaborative Learning</h3>
+          <p class="text-muted mb-0 px-2">
+            Share knowledge and learn together with your peers in real-time.
+          </p>
+        </div>
+      </div>
+
+      <!-- Smart Analytics -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card h-100 text-center">
+          <div class="feature-icon-wrapper mb-4">
+            <div class="feature-icon bg-warning-soft">
+              <i class="bi bi-graph-up-arrow text-warning"></i>
+            </div>
+          </div>
+          <h3 class="h5 mb-3 fw-bold text-gray-800">Smart Analytics</h3>
+          <p class="text-muted mb-0 px-2">
+            Track your progress with detailed insights and personalized metrics.
+          </p>
+        </div>
+      </div>
+
+      <!-- AI Support -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card h-100 text-center">
+          <div class="feature-icon-wrapper mb-4">
+            <div class="feature-icon bg-info-soft">
+              <i class="bi bi-robot text-info"></i>
+            </div>
+          </div>
+          <h3 class="h5 mb-3 fw-bold text-gray-800">AI Support</h3>
+          <p class="text-muted mb-0 px-2">
+            Get intelligent assistance and personalized content recommendations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section py-6">
+  <div class="container">
+    <div class="row g-4 text-center justify-content-center">
+      <div class="col-md-4">
+        <div class="stat-card p-5">
+          <div class="stat-icon-bg stat-bg-primary mb-4">
+            <i class="bi bi-collection-play"></i>
+          </div>
+          <h3 class="display-3 fw-bold text-gradient mb-2">6+</h3>
+          <p class="text-muted fw-semibold mb-0">Active Courses</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stat-card p-5">
+          <div class="stat-icon-bg stat-bg-success mb-4">
+            <i class="bi bi-journal-text"></i>
+          </div>
+          <h3 class="display-3 fw-bold text-gradient mb-2">50+</h3>
+          <p class="text-muted fw-semibold mb-0">Learning Resources</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stat-card p-5">
+          <div class="stat-icon-bg stat-bg-info mb-4">
+            <i class="bi bi-clock-history"></i>
+          </div>
+          <h3 class="display-3 fw-bold text-gradient mb-2">24/7</h3>
+          <p class="text-muted fw-semibold mb-0">AI Support</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block extra_css %}
+<style>
+  /* ============================= Color Variables ============================= */
+  :root {
+    --primary-50: #eef2ff;
+    --primary-100: #e0e7ff;
+    --primary-500: #6366f1;
+    --primary-600: #4f46e5;
+    --primary-700: #443ab4;
+
+    --accent-400: #f472b6;
+    --accent-500: #ec4899;
+
+    --gray-0: #ffffff;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #00b37a;
+    --gray-800: #1f2937;
+
+    --success-rgb: 34, 197, 94;
+    --warning-rgb: 234, 179, 8;
+    --info-rgb: 14, 165, 233;
+    --danger-500: #dc3545;
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --radius-md: 0.5rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
+    --transition-all: all 0.3s ease;
+  }
+
+  /* ============================= Hero Section ============================= */
+  .welcome-section {
+    /* background: var(--gray-0); */
+    position: relative;
+    background: #00b37a;
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+        circle at 25% 25%,
+        var(--primary-50) 0%,
+        transparent 50%
+      ),
+      radial-gradient(circle at 75% 75%, var(--accent-400) 0%, transparent 50%);
+    opacity: 0.8;
+    background: #00b37a;
+
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Badge */
+  .hero-badge {
+    display: inline-block;
+  }
+
+  .badge-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.625rem 1.25rem;
+    background: var(--primary-50);
+    border: 1px solid var(--primary-100);
+    border-radius: var(--radius-full);
+    color: var(--primary-600);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  /* Text Styles */
+  .hero-content h1 {
+    color: var(--gray-800);
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, var(--primary-600), var(--accent-500));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-alt {
+    background: linear-gradient(90deg, var(--primary-600), var(--accent-500));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gray-800 {
+    color: var(--gray-800);
+  }
+
+  .hero-content .lead {
+    color: var(--gray-800);
+  }
+
+  .highlight-text {
+    color: var(--primary-600);
+    font-weight: 600;
+  }
+
+  /* Rocket Icon */
+  .rocket-icon {
+    display: inline-block;
+    filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.2));
+  }
+
+  /* Buttons */
+  .btn-get-started {
+    background: var(--primary-600);
+    color: var(--gray-0);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 0.875rem 2rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: var(--transition-all);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .btn-get-started:hover {
+    background: var(--primary-700);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: var(--gray-0);
+  }
+
+  .btn-get-started:active {
+    transform: translateY(0);
+  }
+
+  .btn-learn-more {
+    background: var(--gray-0);
+    color: var(--gray-800);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    padding: 0.875rem 2rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: var(--transition-all);
+  }
+
+  .btn-learn-more:hover {
+    background: var(--gray-50);
+    border-color: var(--primary-600);
+    color: var(--primary-600);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .btn-learn-more:active {
+    transform: translateY(0);
+  }
+
+  /* Developer Credit */
+  .developer-credit {
+    color: var(--gray-800);
+  }
+
+  .linkedin-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-600);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    background: var(--primary-50);
+    transition: var(--transition-all);
+  }
+
+  .linkedin-link:hover {
+    background: var(--primary-100);
+    color: var(--primary-700);
+    transform: translateX(4px);
+  }
+
+  /* ============================= Features Section ============================= */
+  .features-section {
+    background: var(--gray-50);
+  }
+
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.25rem;
+    background: var(--primary-50);
+    border: 1px solid var(--primary-100);
+    border-radius: var(--radius-full);
+    color: var(--primary-600);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  .feature-card {
+    background: var(--gray-0);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem 1.5rem;
+    box-shadow: var(--shadow-xs);
+    transition: var(--transition-all);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-100);
+  }
+
+  .feature-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-xl);
+    font-size: 2.25rem;
+    margin: 0 auto;
+    transition: var(--transition-all);
+  }
+
+  .feature-card:hover .feature-icon {
+    transform: scale(1.1);
+  }
+
+  .bg-primary-soft {
+    background: var(--primary-50);
+  }
+
+  .bg-success-soft {
+    background: rgba(var(--success-rgb), 0.1);
+  }
+
+  .bg-warning-soft {
+    background: rgba(var(--warning-rgb), 0.1);
+  }
+
+  .bg-info-soft {
+    background: rgba(var(--info-rgb), 0.1);
+  }
+
+  .text-primary {
+    color: var(--primary-600) !important;
+  }
+
+  .text-success {
+    color: rgb(var(--success-rgb)) !important;
+  }
+
+  .text-warning {
+    color: rgb(var(--warning-rgb)) !important;
+  }
+
+  .text-info {
+    color: rgb(var(--info-rgb)) !important;
+  }
+
+  /* ============================= Stats Section ============================= */
+  .stats-section {
+    background: var(--gray-0);
+  }
+
+  .stat-card {
+    background: var(--gray-0);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xs);
+    transition: var(--transition-all);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-100);
+  }
+
+  .stat-icon-bg {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-xl);
+    margin: 0 auto;
+    font-size: 2.25rem;
+    transition: var(--transition-all);
+  }
+
+  .stat-card:hover .stat-icon-bg {
+    transform: scale(1.1);
+  }
+
+  .stat-bg-primary {
+    background: var(--primary-50);
+    color: var(--primary-600);
+  }
+
+  .stat-bg-success {
+    background: rgba(var(--success-rgb), 0.1);
+    color: rgb(var(--success-rgb));
+  }
+
+  .stat-bg-info {
+    background: rgba(var(--info-rgb), 0.1);
+    color: rgb(var(--info-rgb));
+  }
+
+  /* ============================= Utilities ============================= */
+  .py-6 {
+    padding-block: 5rem;
+  }
+
+  @media (min-width: 992px) {
+    .py-6 {
+      padding-block: 7rem;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .display-1 {
+      font-size: 3rem;
+    }
+
+    .rocket-icon {
+      font-size: 3rem !important;
+    }
+
+    .btn-get-started,
+    .btn-learn-more {
+      font-size: 1rem;
+      padding: 0.75rem 1.75rem;
+    }
+  }
+</style>
+{% endblock %} {% block extra_js %}
+<script>
+  // Smooth scroll only
+  document
+    .querySelector('a[href="#features"]')
+    ?.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.querySelector("#features").scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+</script>
+{% endblock %}
