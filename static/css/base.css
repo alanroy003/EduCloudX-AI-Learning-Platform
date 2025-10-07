@@ -1,0 +1,753 @@
+/* 0. Smooth scroll for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 1. CSS Variables & Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto&display=swap");
+
+:root {
+  --primary: #297b76;
+  --secondary: #3a9d9a;
+  --accent: #1e88e5;
+  --gray-light: #f4f6f6;
+  --gray-dark: #1c2b2b;
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Roboto", sans-serif;
+}
+
+/* 2. Base Styles */
+body {
+  font-family: var(--font-body);
+  background-color: var(--gray-light);
+  margin: 0;
+  padding: 0;
+  color: var(--gray-dark);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--gray-dark);
+}
+
+/* 3. Navbar */
+.navbar {
+  background: linear-gradient(to right, #1c2b2b, #297b76) !important;
+  padding: 1rem 0;
+  border-radius: 0 0 10px 10px;
+}
+
+.navbar-brand {
+  color: white !important;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  margin: 0 0.2rem;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white !important;
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: white !important;
+}
+
+.nav-link i {
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover i {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* 4. Buttons */
+.btn-primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.btn-success {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+.btn-success:hover,
+.btn-success:focus {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+
+/* 5. Forms */
+.form-control {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+  color: white;
+}
+
+.btn-light {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 10px;
+}
+
+.btn-light:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* 6. Cards & Alerts */
+.card {
+  border: none;
+  border-radius: 0.625rem;
+  background: white;
+}
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+.alert {
+  border-radius: 0.3125rem;
+}
+
+/* 7. Footer */
+footer {
+  font-size: 0.9rem;
+  color: var(--gray-dark);
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
+  border-radius: 10px 10px 0 0;
+}
+
+footer .footer-brand {
+  color: var(--gray-dark);
+}
+
+footer h6 {
+  color: var(--gray-dark);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+footer .nav-link {
+  padding: 0.4rem 0;
+  transition: all 0.2s ease;
+  color: var(--gray-dark) !important;
+}
+
+footer .nav-link:hover {
+  color: var(--primary) !important;
+  transform: translateX(5px);
+}
+
+footer .form-control {
+  border: 1px solid #ddd;
+  background: white;
+  color: var(--gray-dark);
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+}
+
+footer .btn-primary {
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(135deg, #297b76 0%, #1c2b2b 100%);
+  border: none;
+  font-weight: 500;
+  border-radius: 10px;
+}
+
+/* Logout Link */
+.nav-link.text-danger {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.nav-link.text-danger:hover {
+  color: #ff6b6b !important;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 8. Utility */
+.mx-auto {
+  margin: 0 auto !important;
+}
+
+/* 9. Hero Section */
+.hero {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #e0f2f1, #f4f6f6);
+}
+
+/* 10. Features */
+.features {
+  padding-top: 6rem;
+}
+.features .card {
+  border-radius: 0.625rem;
+}
+
+/* 11. Learn More button */
+.welcome-section {
+  position: relative;
+  background: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
+  background-image: radial-gradient(#e6e9f5 1.5px, transparent 1.5px),
+    radial-gradient(#e6e9f5 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  overflow: hidden;
+}
+
+.welcome-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  z-index: 1;
+}
+
+.welcome-section > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* 12. Get Started Button */
+.btn-get-started {
+  background: linear-gradient(45deg, #2b3990 0%, #1565c0 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(43, 57, 144, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-get-started::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-get-started:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(43, 57, 144, 0.3);
+  color: white;
+}
+
+.btn-get-started:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-learn-more {
+  background: transparent;
+  color: #2b3990;
+  border: 2px solid #2b3990;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-learn-more {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 1rem 2.5rem;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.btn-learn-more::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.btn-learn-more:hover {
+  color: white;
+  border-color: transparent;
+}
+
+.btn-learn-more:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.text-gradient {
+  background: linear-gradient(120deg, #ffffff 0%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* 15. Animations */
+.animate-up,
+.animate-up-delay,
+.animate-up-delay-2 {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+}
+.animate-up-delay {
+  animation-delay: 0.2s;
+}
+.animate-up-delay-2 {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover Lift */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 13. Profile Card */
+.profile-header {
+  background: linear-gradient(to right bottom, #ffffff, #f4f6f6);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--gray-dark);
+  border-radius: 10px;
+}
+.btn-edit:hover {
+  background: var(--gray-light);
+  transform: translateY(-1px);
+}
+
+.profile-header h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 0.5rem;
+}
+
+.badge {
+  background: rgba(var(--bs-primary-rgb), 0.1);
+  color: var(--bs-primary);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.social-links {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-github,
+.btn-linkedin {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-github {
+  background: #24292e;
+  color: white;
+  border: none;
+}
+
+.btn-github:hover {
+  background: #1b1f23;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.btn-linkedin {
+  background: #0a66c2;
+  color: white;
+  border: none;
+}
+
+.btn-linkedin:hover {
+  background: #0958a8;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.profile-stats {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.profile-stats .stat {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+/* 14. Course Button */
+.btn-view-course {
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+  color: white !important;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(30, 136, 229, 0.2);
+}
+.btn-view-course:hover {
+  background: linear-gradient(135deg, var(--secondary), var(--accent));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
+}
+
+.btn-view-course {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--primary-600) 100%
+  );
+  color: white !important;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 83, 186, 0.2);
+  opacity: 0.95;
+}
+
+.btn-view-course:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary-600) 0%,
+    var(--primary-700) 100%
+  );
+  transform: translateY(-1px);
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(0, 83, 186, 0.3);
+  opacity: 1;
+
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-learn-more::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #2b3990, #1565c0);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.btn-learn-more:hover {
+  color: white;
+  border-color: transparent;
+}
+
+.btn-learn-more:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.text-gradient {
+  background: linear-gradient(120deg, #ffffff 0%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  display: inline-block;
+}
+
+.animate-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.animate-up-delay {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards 0.2s;
+}
+
+.animate-up-delay-2 {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards 0.4s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Card Styles */
+.profile-header {
+  background: linear-gradient(to right bottom, #ffffff, #f8f9fa);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.btn-edit {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #6c757d;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-edit:hover {
+  background: #f8f9fa;
+  color: #212529;
+  transform: translateY(-1px);
+}
+
+.profile-header h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 0.5rem;
+}
+
+.badge {
+  background: rgba(var(--bs-primary-rgb), 0.1);
+  color: var(--bs-primary);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.social-links {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-github,
+.btn-linkedin {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-github {
+  background: #24292e;
+  color: white;
+  border: none;
+}
+
+.btn-github:hover {
+  background: #1b1f23;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.btn-linkedin {
+  background: #0a66c2;
+  color: white;
+  border: none;
+}
+
+.btn-linkedin:hover {
+  background: #0958a8;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.profile-stats {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.profile-stats .stat {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+/* Course View Button Styles */
+.btn-view-course {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--primary-600) 100%
+  );
+  color: white !important;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 83, 186, 0.2);
+  opacity: 0.95;
+}
+
+.btn-view-course:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary-600) 0%,
+    var(--primary-700) 100%
+  );
+  transform: translateY(-1px);
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(0, 83, 186, 0.3);
+  opacity: 1;
+}

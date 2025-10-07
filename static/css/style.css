@@ -1,0 +1,290 @@
+/* static/css/components.css /
+/ Components — built on top of design system variables */
+
+/* 🪶 Flash Message Fix */
+.container.mt-3 + section.hero {
+  margin-top: -1rem;
+  background: #00b37a;
+}
+
+/*  Hero Section */
+.hero {
+  background: linear-gradient(135deg, var(--primary-700), var(--primary-500));
+  color: #fff;
+  padding: clamp(4rem, 15vw, 8rem) var(--space-4);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 var(--radius-3xl) var(--radius-3xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.8 0 7-3.1 7-7s-3.1-7-7-7-7 3.1-7 7 3.1 7 7 7zm48 25c3.8 0 7-3.1 7-7s-3.1-7-7-7-7 3.1-7 7 3.1 7 7 7z' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+.hero h1 {
+  font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+  margin-bottom: var(--space-4);
+}
+
+.hero p.lead {
+  font-size: clamp(var(--text-base), 2.5vw, var(--text-lg));
+  margin-bottom: var(--space-6);
+  opacity: 0.9;
+}
+
+.hero .btn {
+  margin: 0 var(--space-2) var(--space-3);
+  min-width: 150px;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-all);
+  box-shadow: var(--shadow-base);
+}
+
+/* 🌱 Features Section */
+.features {
+  padding: clamp(var(--space-10), 8vw, var(--space-16)) var(--space-4);
+  background-color: var(--gray-50);
+  position: relative;
+}
+
+.features::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gray-200) 15%,
+    var(--gray-200) 85%,
+    transparent 100%
+  );
+}
+
+.features h2 {
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+  margin-bottom: var(--space-8);
+  text-align: center;
+  color: var(--gray-900);
+}
+
+.features .row > [class*="col-"] {
+  display: flex;
+}
+
+.features .card {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  height: 100%;
+  transition: var(--transition-all);
+}
+
+.features .card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-300);
+}
+
+.features .card .bi {
+  font-size: 2rem;
+  margin-bottom: var(--space-4);
+  color: var(--primary-500);
+}
+
+/* 💨 Skeleton Loading */
+@keyframes shimmer {
+  0% {
+    background-position: -500px 0;
+  }
+  100% {
+    background-position: 500px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--gray-200) 0%,
+    var(--gray-100) 50%,
+    var(--gray-200) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-lg);
+}
+
+/* 🎓 Courses Horizontal Carousel */
+.courses-scroll {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: var(--space-4) 0;
+}
+
+.courses-scroll .card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  border-radius: var(--radius-xl);
+  transition: var(--transition-all);
+}
+
+.courses-scroll .card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.courses-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+.courses-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--primary-400);
+  border-radius: var(--radius-full);
+}
+
+/* ✨ Learn More Button */
+a.btn-outline-light.learn-more {
+  border-color: #fff;
+  color: #fff;
+  border-radius: var(--radius-lg);
+  transition: var(--transition-colors);
+}
+a.btn-outline-light.learn-more:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+/* 🔔 Notifications Dropdown */
+.notifications-menu {
+  width: 400px !important;
+  max-height: 600px !important;
+  overflow-y: auto;
+  border: none !important;
+  border-radius: var(--radius-2xl) !important;
+  box-shadow: var(--shadow-xl) !important;
+  padding: var(--space-4) !important;
+  margin-top: var(--space-4) !important;
+  right: -10px !important;
+  background: #fff !important;
+}
+
+.notifications-menu .dropdown-item {
+  padding: var(--space-4) !important;
+  border-radius: var(--radius-lg) !important;
+  margin-bottom: var(--space-3) !important;
+  background: #fff !important;
+  border: 1px solid transparent !important;
+  transition: var(--transition-all) !important;
+}
+
+.notifications-menu .dropdown-item.unread {
+  background-color: var(--gray-100) !important;
+  border-color: var(--gray-200) !important;
+  font-weight: 500 !important;
+}
+
+.notifications-menu .dropdown-item:hover {
+  background-color: var(--gray-50) !important;
+  transform: translateX(4px);
+}
+
+/* 🔔 Notification Badge */
+.nav-item .badge.bg-danger {
+  position: absolute !important;
+  top: -6px !important;
+  right: -6px !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 600 !important;
+  min-width: 20px !important;
+  height: 20px !important;
+  border-radius: var(--radius-full) !important;
+  border: 2px solid #fff !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* Notification Button */
+.nav-item .btn-light {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: none !important;
+  padding: var(--space-2) !important;
+  width: 44px !important;
+  height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: var(--radius-xl) !important;
+  transition: var(--transition-all) !important;
+}
+.nav-item .btn-light:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-2px) !important;
+}
+.nav-item .btn-light i {
+  color: #fff !important;
+  font-size: 1.25rem !important;
+}
+
+/* 📰 Post Cards */
+.post-card {
+  background: white;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--gray-100);
+  box-shadow: var(--shadow-base);
+  transition: var(--transition-all);
+}
+.post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+.post-card .card-body {
+  padding: var(--space-5);
+}
+.post-card .avatar-wrapper {
+  width: 42px;
+  height: 42px;
+  overflow: hidden;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--primary-300);
+}
+.post-card .avatar-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.post-card .post-meta {
+  font-size: var(--text-xs);
+  color: var(--gray-500);
+}
+.post-card .card-title {
+  color: var(--gray-900);
+  font-weight: 600;
+  margin: var(--space-2) 0;
+}
+.post-card .card-text {
+  color: var(--gray-700);
+  line-height: var(--leading-relaxed);
+}
+.post-card .btn-view {
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  transition: var(--transition-all);
+}
+.post-card .btn-view:hover {
+  background: var(--gray-50);
+  color: var(--primary-600);
+}
