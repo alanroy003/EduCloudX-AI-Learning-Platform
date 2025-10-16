@@ -26,6 +26,7 @@
 .container.mt-3 + section.hero {
   margin-top: -1rem;
   background: #00b37a;
+  background: #00b37a;
 }
 
 /* 🦋 Hero Section */

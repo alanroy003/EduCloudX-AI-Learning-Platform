@@ -1,0 +1,26 @@
+{# templates/partials/like_form.html #}
+<div id="like-form-{{ post.id }}">
+  <form
+    method="post"
+    hx-post="{% url 'toggle_like' post.id %}"
+    hx-target="#like-form-{{ post.id }}"
+    hx-swap="outerHTML"
+    class="d-inline"
+  >
+    {% csrf_token %}
+    <div class="d-flex align-items-center gap-3">
+      {% if user in post.likes.all %}
+        <button type="submit" class="btn btn-outline-danger">
+          <i class="bi bi-heart-fill"></i> Unlike
+        </button>
+      {% else %}
+        <button type="submit" class="btn btn-outline-primary">
+          <i class="bi bi-heart"></i> Like
+        </button>
+      {% endif %}
+      <span class="text-muted">
+        <strong>{{ post.likes.count }}</strong> like{{ post.likes.count|pluralize }}
+      </span>
+    </div>
+  </form>
+</div>

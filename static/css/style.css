@@ -15,7 +15,9 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+
   border-radius: 0 0 var(--radius-3xl) var(--radius-3xl);
+  box-shadow: var(--shadow-lg);
   box-shadow: var(--shadow-lg);
 }
 
