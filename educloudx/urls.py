@@ -27,6 +27,7 @@ urlpatterns = [
     path("healthz/", lambda request: HttpResponse("OK")),
 ]
 
+
 if settings.DEBUG:
     # 1) Django admin ve tüm static dosyalarınız (/static/...) burada sunulsun
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

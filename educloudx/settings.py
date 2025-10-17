@@ -8,6 +8,7 @@ from pathlib import Path
 import os
 import environ
 
+
 # ----------------- ENV CONFIG -----------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
