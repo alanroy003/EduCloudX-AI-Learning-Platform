@@ -1,5 +1,3 @@
-{"id":"58201","variant":"standard","title":"EduCloudX – An AI-Powered Social Learning Platform README.md"}
-
 # EduCloudX – An AI-Powered Social Learning Platform
 
 <p align="center">
@@ -7,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Alan21303/EduCloudX-AI-Learning-Platform/main/landing.png" alt="EduCloudX Landing Page" width="800"/>
+  <img src="docs/landing.png" alt="EduCloudX Landing Page" width="800"/>
 </p>
 
 <p align="center">
