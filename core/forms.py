@@ -9,7 +9,7 @@ import os
 from .models import Post, Profile, Comment
 
 
-# ---------- yardımcı doğrulayıcılar ----------
+# ---------- helper validators ----------
 def validate_file_size(f):
     if f.size > 5 * 1024 * 1024:  # 5 MB
         raise ValidationError("File is larger than 5 MB.")

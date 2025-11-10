@@ -28,13 +28,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.sites",  # social login için şart!
+    "django.contrib.sites",  # required for social login!
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.github",
-    "core.apps.CoreConfig",  # sinyal için app
+    "core.apps.CoreConfig",  # app for signals
 ]
 
 SITE_ID = 1
@@ -73,14 +73,14 @@ SOCIALACCOUNT_PROVIDERS = {
 # ----------------- MIDDLEWARE -----------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",       # ← WhiteNoise middleware eklendi
+    "whitenoise.middleware.WhiteNoiseMiddleware",       # ← WhiteNoise middleware added
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "allauth.account.middleware.AccountMiddleware",     # social-allauth için
+    "allauth.account.middleware.AccountMiddleware",     # for social-allauth
 ]
 
 ROOT_URLCONF = "educloudx.urls"
@@ -95,7 +95,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                # bizim eklediklerimiz:
+                # our additions:
                 "core.context_processors.notifications",
             ],
         },
@@ -147,7 +147,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# WhiteNoise için: statik dosyaları sıkıştır ve cache-control header ekle
+# For WhiteNoise: compress static files and add cache-control headers
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # ----------------- DEFAULT PK FIELD -----------------
@@ -159,7 +159,9 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 20 * 1024 * 1024  # 20MB
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
-# -------- Hugging Face Özetleme Ayarları --------
-HF_API_TOKEN       = env("HF_API_TOKEN")
-HF_SUMMARY_API_URL = env("HF_SUMMARY_API_URL")
-HF_EXPLAIN_API_URL = env("HF_EXPLAIN_API_URL")
+# -------- Hugging Face Summary Settings --------
+HF_API_TOKEN = env("HF_API_TOKEN", default=None)
+HF_SUMMARY_MODEL_PRIMARY = env("HF_SUMMARY_MODEL_PRIMARY", default="facebook/bart-large-cnn")
+HF_SUMMARY_MODEL_FALLBACK = env("HF_SUMMARY_MODEL_FALLBACK", default="t5-base")
+HF_EXPLAIN_MODEL_PRIMARY = env("HF_EXPLAIN_MODEL_PRIMARY", default="google/flan-t5-small")
+HF_EXPLAIN_MODEL_FALLBACK = env("HF_EXPLAIN_MODEL_FALLBACK", default="t5-small")

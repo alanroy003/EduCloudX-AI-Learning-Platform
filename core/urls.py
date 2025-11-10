@@ -26,10 +26,9 @@ urlpatterns = [
         "comment/<int:comment_id>/delete/", views.delete_comment, name="delete_comment"
     ),
     path("posts/<int:post_id>/like/", views.toggle_like, name="toggle_like"),
-    # --- Yeni eklenen: Search ---
+    # --- Newly added: Search ---
     path("search/", views.search, name="search"),
     path("dashboard/", views.dashboard, name="dashboard"),
-    path("posts/<int:post_id>/like/", views.toggle_like, name="toggle_like"),
     path("notifications/", views.notifications, name="notifications"),
     path(
         "notifications/read/<int:pk>/",

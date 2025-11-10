@@ -1,13 +1,13 @@
 {% extends 'base.html' %} {% load socialaccount %} {% block content %}
 
 <style>
-  /* input içindeki yazının hep görünür olması için */
+  /* To make the text inside the input always visible */
   form input.form-control {
-    background-color: #fff !important; /* beyaz zemin */
-    color: #212529 !important; /* koyu metin */
+    background-color: #fff !important; /* white background */
+    color: #212529 !important; /* dark text */
   }
   form input.form-control::placeholder {
-    color: #6c757d !important; /* gri placeholder */
+    color: #6c757d !important; /* gray placeholder */
   }
   form input.form-control:focus {
     background-color: #fff !important;
@@ -29,7 +29,7 @@
         </p>
       </div>
 
-      <!-- Google ile devam -->
+      <!-- Continue with Google -->
       <div class="mb-3 text-center">
         <a
           href="{% provider_login_url 'google' %}"
@@ -47,7 +47,7 @@
       </div>
 
       <form method="POST" autocomplete="on">
-        {% csrf_token %} {# Genel form hataları #} {% if form.non_field_errors
+        {% csrf_token %} {# General form errors #} {% if form.non_field_errors
         %}
         <div class="alert alert-danger">
           {% for err in form.non_field_errors %}

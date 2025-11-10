@@ -12,6 +12,7 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.utils import timezone
 import logging
+logger = logging.getLogger(__name__)
 from django.core.mail import send_mail
 
 from .models import Profile, Discipline, Course, Post, Comment, Like, Notification, User
@@ -198,7 +199,7 @@ def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     comment_form = CommentForm()
 
-    # kısa içerikse explain, uzun içerikse summary butonu göstermek için
+    # To show 'explain' button for short content, 'summary' for long content
     TEXT_EXPLAIN_THRESHOLD = 200
     content_text = post.content or ""
     is_short_content = (
@@ -369,7 +370,7 @@ def toggle_like(request, post_id):
                 message=f'{user.username} liked your post "{post.title}"',
             )
 
-    # HTMX request ise sadece like form partial
+    # If it's an HTMX request, render only the like form partial
     if request.headers.get("Hx-Request"):
         return render(
             request,
@@ -476,7 +477,6 @@ def post_explain(request, slug):
             },
         )
     except Exception as e:
-        logger = logging.getLogger(__name__)
         logger.error(f"AI explanation error: {str(e)}")
 
         error_msg = str(e)
@@ -495,9 +495,9 @@ def post_explain(request, slug):
 @login_required
 def post_summary(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    summary_type = request.GET.get("type", "pdf")  # 'pdf' veya 'text'
+    summary_type = request.GET.get("type", "pdf")  # 'pdf' or 'text'
 
-    # Kaynak metni al
+    # Get the source text
     try:
         if summary_type == "pdf":
             if not post.file:
@@ -522,15 +522,14 @@ def post_summary(request, slug):
                     {"error": "No text content to process."},
                 )
 
-        # Özet üret
+        # Generate summary
         chunks = chunk_text(text, max_chars=8000)
         summaries = []
 
         for block in chunks:
             try:
-                summaries.append(generate_summary(block))
+                summaries.append(generate_summary(text=block))
             except Exception as e:
-                logger = logging.getLogger(__name__)
                 logger.error(f"Chunk summarization error: {str(e)}")
                 return render(
                     request,
@@ -540,7 +539,7 @@ def post_summary(request, slug):
 
         final_summary = "\n\n".join(summaries)
 
-        # PDF özeti ise kaydet
+        # If it's a PDF summary, save it
         if summary_type == "pdf":
             post.pdf_summary = final_summary
             post.save()
@@ -556,7 +555,6 @@ def post_summary(request, slug):
         )
 
     except Exception as e:
-        logger = logging.getLogger(__name__)
         logger.error(f"AI summary error: {str(e)}")
 
         error_msg = str(e)

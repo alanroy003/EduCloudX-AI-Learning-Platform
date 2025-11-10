@@ -1,6 +1,7 @@
 {# core/templates/_comments_list.html #}
+
 <div class="comments-list-wrapper">
-  {% for comment in comments %}
+  {% if comments %} {% for comment in comments %}
   <div
     class="comment-card mb-4 p-3 border rounded position-relative bg-light"
     id="comment-{{ comment.id }}"
@@ -8,7 +9,11 @@
     <div class="d-flex">
       <div class="avatar-wrapper me-3">
         <img
-          src="{{ comment.user.profile.avatar.url }}"
+          src="{% if comment.user.profile.avatar %}
+            {{ comment.user.profile.avatar.url }}
+         {% else %}
+            /static/images/default-avatar.png
+         {% endif %}"
           alt="{{ comment.user.username }}'s avatar"
           class="rounded-circle"
           width="40"
@@ -16,141 +21,79 @@
           style="object-fit: cover"
         />
       </div>
+
       <div class="flex-grow-1">
         <div class="d-flex justify-content-between align-items-start mb-2">
           <div>
             <strong>{{ comment.user.username }}</strong>
-            <small clas{# core/templates/_comments_list.html #}
-
-            <div class="comments-list-wrapper">
-              {% for comment in comments %}
-              <div
-                class="comment-card mb-4 p-3 position-relative"
-                id="comment-{{ comment.id }}"
-              >
-                <div class="d-flex">
-                  <div class="avatar-wrapper me-3">
-                    <img
-                      src="{{ comment.user.profile.avatar.url }}"
-                      alt="{{ comment.user.username }}'s avatar"
-                    />
-                  </div>
-                  <div class="flex-grow-1">
-                    <div
-                      class="d-flex justify-content-between align-items-start mb-2"
-                    >
-                      <div>
-                        <strong>{{ comment.user.username }}</strong>
-                        <small class="text-muted ms-2"
-                          >{{ comment.created_at|date:"M j, Y H:i" }}</small
-                        >
-                      </div>
-                      {% if user == comment.user or user.is_superuser %}
-                      <div class="btn-group btn-group-sm">
-                        <button
-                          type="button"
-                          hx-get="{% url 'edit_comment' comment.id %}"
-                          hx-target="#comment-{{ comment.id }}"
-                          hx-swap="outerHTML"
-                          class="btn btn-outline-secondary btn-sm"
-                        >
-                          <i class="bi bi-pencil"></i>
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-outline-danger btn-sm"
-                          data-bs-toggle="modal"
-                          data-bs-target="#deleteCommentModal-{{ comment.id }}"
-                        >
-                          <i class="bi bi-trash"></i>
-                        </button>
-                      </div>
-                      {% endif %}
-                    </div>
-                    <div class="comment-content">{{ comment.content }}</div>
-                  </div>
-                </div>
-              </div>
-              <style>
-                .comment-card {
-                  background: var(--gray-50);
-                  border: 1px solid var(--gray-200);
-                  border-radius: var(--radius-xl);
-                  box-shadow: var(--shadow-sm);
-                  transition: var(--transition-all);
-                }
-                .comment-card:hover {
-                  background-color: var(--gray-100) !important;
-                  box-shadow: var(--shadow-md);
-                }
-                .comment-content {
-                  line-height: var(--leading-relaxed);
-                  white-space: pre-line;
-                  word-break: break-word;
-                  color: var(--gray-800);
-                }
-                .avatar-wrapper img {
-                  border: 2px solid var(--gray-50);
-                  box-shadow: var(--shadow-sm);
-                  border-radius: var(--radius-full);
-                }
-                .btn-group-sm > .btn {
-                  padding: var(--space-2) var(--space-3);
-                  font-size: var(--text-sm);
-                  border-radius: var(--radius-md);
-                  transition: var(--transition-colors);
-                }
-                .btn-group-sm > .btn:hover {
-                  transform: translateY(-1px);
-                  box-shadow: var(--shadow-sm);
-                } /* Modal Layer Fixes */
-                .modal-backdrop {
-                  z-index: 1040;
-                }
-                .modal {
-                  z-index: 1050;
-                } /* Delete Modal Header */
-                .modal-header.bg-danger {
-                  background-color: var(--danger-500, #dc3545);
-                }
-                .modal-header .modal-title {
-                  font-weight: 600;
-                }
-              </style>
-
-              <script>
-                function closeDeleteModal(commentId) {
-                  const modalEl = document.getElementById(
-                    `deleteCommentModal-${commentId}`
-                  );
-                  const modal = bootstrap.Modal.getInstance(modalEl);
-                  if (modal) {
-                    modal.hide();
-                  }
-
-                  // Clean up modal backdrop
-                  document
-                    .querySelectorAll(".modal-backdrop")
-                    .forEach((el) => el.remove());
-                  document.body.classList.remove("modal-open");
-                  document.body.style.removeProperty("overflow");
-                  document.body.style.removeProperty("padding-right");
-                }
-
-                document.addEventListener("htmx:afterSwap", function (evt) {
-                  // Clean up any remaining modal artifacts
-                  document
-                    .querySelectorAll(".modal-backdrop")
-                    .forEach((el) => el.remove());
-                  document.body.classList.remove("modal-open");
-                  document.body.style.removeProperty("overflow");
-                  document.body.style.removeProperty("padding-right");
-                });
-              </script>
-            </div>
+            <small class="text-muted ms-2">
+              {{ comment.created_at|date:"M j, Y H:i" }}
+            </small>
           </div>
+
+          {% if user == comment.user or user.is_superuser %}
+          <div class="btn-group btn-group-sm">
+            <button
+              type="button"
+              hx-get="{% url 'edit_comment' comment.id %}"
+              hx-target="#comment-{{ comment.id }}"
+              hx-swap="outerHTML"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              <i class="bi bi-pencil"></i>
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-outline-danger btn-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#deleteCommentModal-{{ comment.id }}"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+          {% endif %}
         </div>
+
+        <div class="comment-content">{{ comment.content }}</div>
       </div>
     </div>
   </div>
+  {% endfor %} {% else %}
+  <p class="text-muted">No comments yet — be the first to comment! 🎤</p>
+  {% endif %}
 </div>
+
+<style>
+  .comment-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-all);
+  }
+  .comment-card:hover {
+    background-color: var(--gray-100) !important;
+    box-shadow: var(--shadow-md);
+  }
+  .comment-content {
+    line-height: var(--leading-relaxed);
+    white-space: pre-line;
+    word-break: break-word;
+    color: var(--gray-800);
+  }
+  .avatar-wrapper img {
+    border: 2px solid var(--gray-50);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-full);
+  }
+</style>
+
+<script>
+  document.addEventListener("htmx:afterSwap", function () {
+    document.querySelectorAll(".modal-backdrop").forEach((el) => el.remove());
+    document.body.classList.remove("modal-open");
+    document.body.style.removeProperty("overflow");
+    document.body.style.removeProperty("padding-right");
+  });
+</script>

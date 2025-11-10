@@ -88,7 +88,7 @@ Follow these steps to run **EduCloudX** locally:
 ### 2. Clone the Repository
 
 ```bash
-git clone https://github.com/Alan21303/EduCloudX-AI-Learning-Platform.git
+git clone https://github.com/alanroy003/EduCloudX-AI-Learning-Platform.git
 cd EduCloudX-AI-Learning-Platform
 ```
 

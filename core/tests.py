@@ -12,7 +12,7 @@ class SmokeTests(TestCase):
         # Test client
         self.client = Client()
 
-        # 1️⃣ Test kullanıcısını oluştur
+        # 1. Create a test user
         self.username = "testuser"
         self.password = "testpass123"
         self.user = User.objects.create_user(
@@ -20,27 +20,27 @@ class SmokeTests(TestCase):
             password=self.password
         )
 
-        # 2️⃣ Discipline örneği yarat
+        # 2. Create a Discipline instance
         self.discipline = Discipline.objects.create(
             name="Test Discipline",
             slug="test-discipline"
         )
 
-        # 3️⃣ Course örneği yarat ve discipline atamasını yap
+        # 3. Create a Course instance and assign the discipline
         self.course = Course.objects.create(
             code="TST101",
             title="Test Course",
             slug="test-course",
-            description="Test açıklama",
+            description="Test description",
             discipline=self.discipline
         )
 
     def test_register_and_login(self):
-        # Kayıt sayfası GET 200 dönmeli
+        # Register page should return GET 200
         response = self.client.get(reverse("register"))
         self.assertEqual(response.status_code, 200)
 
-        # Mevcut kullanıcıyla login olabiliyor muyuz?
+        # Can we log in with the existing user?
         login_ok = self.client.login(
             username=self.username,
             password=self.password
@@ -48,26 +48,26 @@ class SmokeTests(TestCase):
         self.assertTrue(login_ok)
 
     def test_post_crud_flow(self):
-        # Öne önce login ol
+        # First, log in
         self.client.login(username=self.username, password=self.password)
 
-        # 1) Yeni post formuna GET isteği
+        # 1) GET request to the new post form
         url_create = reverse("create_post", kwargs={"slug": self.course.slug})
         response_get = self.client.get(url_create)
         self.assertEqual(response_get.status_code, 200)
 
-        # 2) POST ile gönderi oluştur
+        # 2) Create a post via POST
         response_post = self.client.post(url_create, {
-            "title": "Test Başlık",
-            "content": "Test içerik"
+            "title": "Test Title",
+            "content": "Test content"
         })
-        # Başarılıysa redirect (302) bekliyoruz
+        # We expect a redirect (302) on success
         self.assertEqual(response_post.status_code, 302)
 
-        # 3) Gerçekten DB'ye kayıt oldu mu?
-        # related_name='posts' kullanıldığı için user.posts üzerinden geliyor
-        post = self.user.posts.get(title="Test Başlık")
+        # 3) Was it actually saved to the DB?
+        # It comes via user.posts because related_name='posts' is used
+        post = self.user.posts.get(title="Test Title")
 
-        # 4) Detay sayfasına doğru yönlendirme
+        # 4) Correct redirection to the detail page
         detail_url = reverse("post_detail", kwargs={"slug": post.slug})
         self.assertRedirects(response_post, detail_url)

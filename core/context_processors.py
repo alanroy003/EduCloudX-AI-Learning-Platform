@@ -9,7 +9,7 @@ def notifications(request):
             user=request.user, is_read=False
         ).count()
         recent_notifications = Notification.objects.filter(user=request.user).order_by(
-            "-created_at" 
+            "-created_at"
         )[:5]
 
         return {

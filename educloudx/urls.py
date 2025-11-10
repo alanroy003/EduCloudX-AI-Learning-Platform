@@ -23,13 +23,13 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("core.urls")),
-    path("accounts/", include("allauth.urls")),  # <-- BURASI!
+    path("accounts/", include("allauth.urls")),  # <-- THIS ONE!
     path("healthz/", lambda request: HttpResponse("OK")),
 ]
 
 
 if settings.DEBUG:
-    # 1) Django admin ve tüm static dosyalarınız (/static/...) burada sunulsun
+    # 1) Serve Django admin and all your static files (/static/...) here
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    # 2) Media dosyalarınız (/media/...) burada sunulsun
+    # 2) Serve your media files (/media/...) here
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
